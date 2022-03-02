@@ -1,0 +1,10 @@
+= Password Rodeo -- Download
+Christophe Pythoud
+2022-02-20
+:revnumber: 1.0
+:example-caption!:
+:source-highlighter: highlight.js
+ifndef::imagesdir[:imagesdir: images]
+ifndef::sourcedir[:sourcedir: ../../test/java/rodeo/password/pgencheck]
+
+This is gonna end up being the download/dependency page for Password Rodeo.

@@ -1,0 +1,197 @@
+= Password Rodeo -- Tutorial
+Christophe Pythoud
+2022-02-20
+:revnumber: 1.0
+:example-caption!:
+:source-highlighter: highlight.js
+ifndef::imagesdir[:imagesdir: images]
+ifndef::sourcedir[:sourcedir: ../../test/java/rodeo/password/pgencheck]
+
+This is a short tutorial to get you started with Password Rodeo.
+
+== Introduction
+
+The two main classes in Password Rodeo are
+link:../site/apidocs/rodeo.password.pgencheck/rodeo/password/pgencheck/PasswordMaker.html[`PasswordMaker`]
+and
+link:../site/apidocs/rodeo.password.pgencheck/rodeo/password/pgencheck/PasswordChecker.html[`PasswordChecker`].
+
+The first one allows you to generate random passwords according to set of criteria you specify. The second one
+allows you to validate passwords submitted by your users, again according to a set of criteria that you get
+to specify.
+
+We'll examine first how to check password submitted by the users of your application and then how to generate
+random passwords.
+
+== Validating Passwords with PasswordChecker
+
+Let's assume we need the users of our application to create a password before they can log in and do some
+work. Let's also assume that we would like this password to be minimally secure, and therefore we'll require
+that this password be at least 8 characters long and contain at least one lower-case letter, one upper-case letter and
+one digit.
+
+We can create a `PasswordChecker` to do just that:
+
+[source,java]
+----
+include::{sourcedir}/TutorialExamples.java[tags=basic-pwd-check,indent=0]
+----
+
+NOTE: The second argument of `setMinMaxCharCount` specifies the maximum length of the password. This argument
+is mandatory and should be set to a value between 2 and 5 times the minimum length. (Unlimited password
+lengths can lead to security issues. Feel free to research the subject on the internet.)
+
+NOTE: The first argument to `addCharGroup` is a `String` that contains characters allowed in the password
+(for exemple `"abcdefgh"`). The
+link:../site/apidocs/rodeo.password.pgencheck/rodeo/password/pgencheck/CharacterSets.html[`CharacterSets`]
+class contains a few pre-defined character lists to get you started.
+
+To check if a password matches the validation criteria, you can use one of three functions provided
+by `PasswordChecker`: `quickCheck`, `check` or `fullCheck`.
+
+If you need a simple yes or no answer, use `quickCheck`:
+
+[source,java]
+----
+include::{sourcedir}/TutorialExamples.java[tags=basic-quick-check,indent=0]
+----
+
+If you need to know why a password is rejected, use the `check` function:
+
+[source,java]
+----
+include::{sourcedir}/TutorialExamples.java[tags=basic-check,indent=0]
+----
+
+The `check` function return a value from the `enum`
+link:../site/apidocs/rodeo.password.pgencheck/rodeo/password/pgencheck/PasswordCheckStatus.html[`PasswordCheckStatus`]
+that either indicates that the password is `OK` or the first error condition encountered, so that it might be
+reported to the user.
+
+As mentioned only the first error detected is returned by this method. If you need a full report, you need to use
+the `fullCheck` method. This method returns a `List` of
+link:../site/apidocs/rodeo.password.pgencheck/rodeo/password/pgencheck/PasswordCheckError.html[`PasswordCheckError`s].
+The `List` is empty if there is no error, otherwise it's possible to iterate over the `List` to process each error.
+
+If the error is of type `ILLEGAL_CHARACTER', the `PasswordCheckError` in the list is actually a subclass,
+link:../site/apidocs/rodeo.password.pgencheck/rodeo/password/pgencheck/IllegalCharacterError.html[`IllegalCharacterError],
+on which the method `getIllegalCharacter` can be called to identify the illegal character.
+
+If the error is of type `NOT_ENOUGH_OF_CHARACTER_TYPE` or `TOO_MANY_OF_CHARACTER_TYPE`, the `PasswordCheckError` in the
+list is the
+link:../site/apidocs/rodeo.password.pgencheck/rodeo/password/pgencheck/BadCountForCharacterTypeError.html[`BadCountForCharacterTypeError`]
+class, which contains methods to identify the character list concerned and the error in the count.
+
+Here is an exemple:
+
+[source,java]
+----
+include::{sourcedir}/TutorialExamples.java[tags=basic-full-check,indent=0]
+----
+
+As you can see there are 4 problems with this password that can all get reported with appropriate details:
+
+* it's too short (error 0);
+* the character `$` is not allowed (error 1);
+* the character `@` is not allowed (error 2);
+* the password doesn't contain any digit (error 3).
+
+IMPORTANT: For a more thorough presentation of password validation, and of the `fullCheck` method in particular,
+please refer to the
+link:manual.html[full Manual].
+
+=== Two more configuration examples
+
+Before tackling password generation, let's look at two more examples of `PasswordChecker` configuration.
+
+Let's assume, we would like to impose more stringent constraints on user password and decide that our passwords
+should have a minimum length of 16 characters and a maximum length of 64 characters. Furthermore, we want
+the passwords to be composed of a mix of upper-case and lower-case letters and digits with at least one of each
+type of characters present. We would also like to allow the user to use _symbols_ in her password (like `$`, `&`,
+`*`, etc.)
+
+Here is how to do it:
+
+[source,java]
+----
+include::{sourcedir}/TutorialExamples.java[tags=sec-pwd-check,indent=0]
+----
+
+NOTE: The `PasswordChecker` class uses an
+link:../site/apidocs/rodeo.password.pgencheck/rodeo/password/pgencheck/PasswordChecker.Factory.html[internal factory class]
+to initialize its instances.
+
+Here is a more extreme example: the password needs to be at least 32 characters long and no more than 160; it has
+to be composed of upper and lower-case characters, digits and symbols. At least one of there four type of characters
+must be present. Also, we don't want more than 5 digits or 3 symbols.
+
+Here is the code to implement this:
+
+[source,java]
+----
+include::{sourcedir}/TutorialExamples.java[tags=weird-pwd-check,indent=0]
+----
+
+CAUTION: This is just a weird example. Please be reasonable with the constraints you place on your users' passwords.
+
+
+== Creating Passwords with PasswordMaker
+
+Let's go back to our first example of a minimally secure password, containing between 8 and 16 characters, with
+upper-case and lowe-case characters and digits (with at least one character in each of these categories).
+
+To generate these kinds of passwords, you would use:
+
+[source,java]
+----
+include::{sourcedir}/TutorialExamples.java[tags=basic-pwd-maker,indent=0]
+----
+
+You can then call `maker.create()` to generate 12 characters long passwords that comply with the criteria
+specified above.
+
+Let's build something a little more secure:
+
+* 32 characters long;
+* at least one upper-case and one lower-case character;
+* between 1 and 3 digits;
+* 2 symbols;
+* and also we want to avoid similar characters that could confuse the user (like `1` vs. `I` vs. `l`, or
+`0` vs. `o` vs. `O`).
+
+[source,java]
+----
+include::{sourcedir}/TutorialExamples.java[tags=sec-pwd-maker,indent=0]
+----
+
+NOTE:
+link:../site/apidocs/rodeo.password.pgencheck/rodeo/password/pgencheck/CharacterSets.html[`CharacterSets`]
+contains list of unambiguous characters you can use to help your users. It's best to avoid these characters
+if your users will need to type their password in, especially on a mobile device.
+
+Another example: let's say we need to generate a random 20 hexadecimal digits string:
+
+[source,java]
+----
+include::{sourcedir}/TutorialExamples.java[tags=hexadecimal,indent=0]
+----
+
+What if you need a random string of characters and numbers to be part of a user-specific URL (password
+reset link for example...) How about:
+
+[source,java]
+----
+include::{sourcedir}/TutorialExamples.java[tags=pwd-reset,indent=0]
+----
+
+NOTE: You can use `PasswordMaker` in many situations that requires the creation of a random string of
+characters according to a predefined pattern.
+
+IMPORTANT: Internally `PasswordMaker` uses `ThreadLocalRandom.current()` to generate random numbers used
+during password creation. You can specifiy your own source of random numbers if you need to. Please refer
+to the link:manual.html[full Manual] for this.
+
+== Conclusion
+
+I hope that this short tutorial gave all the information needed to get started with Password Rodeo. For more
+information, please refer to the link:manual.html[Password Rodeo Manual] or the
