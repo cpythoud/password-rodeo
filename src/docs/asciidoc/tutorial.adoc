@@ -20,17 +20,17 @@ The first one allows you to generate random passwords according to set of criter
 allows you to validate passwords submitted by your users, again according to a set of criteria that you get
 to specify.
 
-We'll examine first how to check password submitted by the users of your application and then how to generate
+We'll examine first how to check passwords submitted by the users of your application and then how to generate
 random passwords.
 
 == Validating Passwords with PasswordChecker
 
-Let's assume we need the users of our application to create a password before they can log in and do some
-work. Let's also assume that we would like this password to be minimally secure, and therefore we'll require
-that this password be at least 8 characters long and contain at least one lower-case letter, one upper-case letter and
+Let's assume we need the users of our application to create a password before they can log in.
+Let's also assume that we would like this password to be minimally secure, and therefore we'll require
+their password to be at least 8 characters long and contain at least one lower-case letter, one upper-case letter and
 one digit.
 
-We can create a `PasswordChecker` to do just that:
+Let's create a `PasswordChecker` to do just that:
 
 [source,java]
 ----
@@ -65,22 +65,23 @@ include::{sourcedir}/TutorialExamples.java[tags=basic-check,indent=0]
 
 The `check` function return a value from the `enum`
 link:../site/apidocs/rodeo.password.pgencheck/rodeo/password/pgencheck/PasswordCheckStatus.html[`PasswordCheckStatus`]
-that either indicates that the password is `OK` or the first error condition encountered, so that it might be
-reported to the user.
+that either indicates that the password is `OK`, or the first error condition encountered that you can then
+report to the user.
 
 As mentioned only the first error detected is returned by this method. If you need a full report, you need to use
 the `fullCheck` method. This method returns a `List` of
-link:../site/apidocs/rodeo.password.pgencheck/rodeo/password/pgencheck/PasswordCheckError.html[`PasswordCheckError`s].
+link:../site/apidocs/rodeo.password.pgencheck/rodeo/password/pgencheck/PasswordCheckError.html[`PasswordCheckError`]s.
 The `List` is empty if there is no error, otherwise it's possible to iterate over the `List` to process each error.
 
-If the error is of type `ILLEGAL_CHARACTER', the `PasswordCheckError` in the list is actually a subclass,
-link:../site/apidocs/rodeo.password.pgencheck/rodeo/password/pgencheck/IllegalCharacterError.html[`IllegalCharacterError],
+If the error is of type `ILLEGAL_CHARACTER`, the `PasswordCheckError` in the list is actually a subclass,
+link:../site/apidocs/rodeo.password.pgencheck/rodeo/password/pgencheck/IllegalCharacterError.html[`IllegalCharacterError`],
 on which the method `getIllegalCharacter` can be called to identify the illegal character.
 
 If the error is of type `NOT_ENOUGH_OF_CHARACTER_TYPE` or `TOO_MANY_OF_CHARACTER_TYPE`, the `PasswordCheckError` in the
-list is the
+list will be of the
 link:../site/apidocs/rodeo.password.pgencheck/rodeo/password/pgencheck/BadCountForCharacterTypeError.html[`BadCountForCharacterTypeError`]
-class, which contains methods to identify the character list concerned and the error in the count.
+subclass, which contains methods to identify the character list concerned and further details regarding the bad
+character counts.
 
 Here is an exemple:
 
@@ -89,20 +90,20 @@ Here is an exemple:
 include::{sourcedir}/TutorialExamples.java[tags=basic-full-check,indent=0]
 ----
 
-As you can see there are 4 problems with this password that can all get reported with appropriate details:
+As you can see there are 4 problems with this password that all get reported in detail:
 
-* it's too short (error 0);
+* the password is too short (error 0);
 * the character `$` is not allowed (error 1);
 * the character `@` is not allowed (error 2);
 * the password doesn't contain any digit (error 3).
 
-IMPORTANT: For a more thorough presentation of password validation, and of the `fullCheck` method in particular,
+IMPORTANT: For a more thorough presentation of password validation, and the `fullCheck` method in particular,
 please refer to the
 link:manual.html[full Manual].
 
 === Two more configuration examples
 
-Before tackling password generation, let's look at two more examples of `PasswordChecker` configuration.
+Before tackling password generation, let's look at two more examples.
 
 Let's assume, we would like to impose more stringent constraints on user password and decide that our passwords
 should have a minimum length of 16 characters and a maximum length of 64 characters. Furthermore, we want
@@ -122,7 +123,7 @@ link:../site/apidocs/rodeo.password.pgencheck/rodeo/password/pgencheck/PasswordC
 to initialize its instances.
 
 Here is a more extreme example: the password needs to be at least 32 characters long and no more than 160; it has
-to be composed of upper and lower-case characters, digits and symbols. At least one of there four type of characters
+to be composed of upper and lower-case characters, digits and symbols. At least one of each type of characters
 must be present. Also, we don't want more than 5 digits or 3 symbols.
 
 Here is the code to implement this:
@@ -138,7 +139,7 @@ CAUTION: This is just a weird example. Please be reasonable with the constraints
 == Creating Passwords with PasswordMaker
 
 Let's go back to our first example of a minimally secure password, containing between 8 and 16 characters, with
-upper-case and lowe-case characters and digits (with at least one character in each of these categories).
+upper-case and lower-case characters and digits (with at least one character in each of these categories).
 
 To generate these kinds of passwords, you would use:
 
@@ -164,8 +165,7 @@ Let's build something a little more secure:
 include::{sourcedir}/TutorialExamples.java[tags=sec-pwd-maker,indent=0]
 ----
 
-NOTE:
-link:../site/apidocs/rodeo.password.pgencheck/rodeo/password/pgencheck/CharacterSets.html[`CharacterSets`]
+NOTE: link:../site/apidocs/rodeo.password.pgencheck/rodeo/password/pgencheck/CharacterSets.html[`CharacterSets`]
 contains list of unambiguous characters you can use to help your users. It's best to avoid these characters
 if your users will need to type their password in, especially on a mobile device.
 
@@ -177,7 +177,7 @@ include::{sourcedir}/TutorialExamples.java[tags=hexadecimal,indent=0]
 ----
 
 What if you need a random string of characters and numbers to be part of a user-specific URL (password
-reset link for example...) How about:
+reset link for example). How about:
 
 [source,java]
 ----
@@ -187,11 +187,12 @@ include::{sourcedir}/TutorialExamples.java[tags=pwd-reset,indent=0]
 NOTE: You can use `PasswordMaker` in many situations that requires the creation of a random string of
 characters according to a predefined pattern.
 
-IMPORTANT: Internally `PasswordMaker` uses `ThreadLocalRandom.current()` to generate random numbers used
-during password creation. You can specifiy your own source of random numbers if you need to. Please refer
+IMPORTANT: Internally `PasswordMaker` uses `ThreadLocalRandom.current()` to generate random numbers for
+password creation. You can specify your own source of random numbers if you need to. Please refer
 to the link:manual.html[full Manual] for this.
 
 == Conclusion
 
-I hope that this short tutorial gave all the information needed to get started with Password Rodeo. For more
+I hope that this short tutorial gave you all the information needed to get started with Password Rodeo. For more
 information, please refer to the link:manual.html[Password Rodeo Manual] or the
+link:../site/apidocs/rodeo.password.pgencheck/module-summary.html[Javadoc].
