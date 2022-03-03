@@ -25,12 +25,14 @@ two bytes.
 Password Rodeo requires at least Java 11, but adapting its source code to an older version of Java should be fairly
 simple if you are so inclined. It's open source and distributed under the
 link:https://www.apache.org/licenses/LICENSE-2.0[Apache Licence 2.0].
+The source code can be found on
+link:https://github.com/cpythoud/password-rodeo[GitHub].
 
 The two main classes in Password Rodeo are
 link:../site/apidocs/rodeo.password.pgencheck/rodeo/password/pgencheck/PasswordChecker.html[`PasswordChecker`]
 for password validation and
 link:../site/apidocs/rodeo.password.pgencheck/rodeo/password/pgencheck/PasswordMaker.html[`PasswordMaker`]
-for password generation. Their use is exhaustively described in the sections below.
+for password generation. Their use is described in the sections below.
 
 If you would like to quickly get up to speed, I would recommend consulting the
 link:tutorial.html[Password Rodeo Tutorial]. Class details can be found in the
@@ -63,11 +65,11 @@ Here is the minimum code to implement a `PasswordChecker`:
 include::{sourcedir}/ManualExamples.java[tags=minimal-check,indent=0]
 ----
 
-This creates a `PasswordChecker` that'll validate passwords composed of the following characters `abcdefgh` with
+This creates a `PasswordChecker` that'll validate passwords composed of the following characters: `abcdefgh`, with
 a length between 16 and 32 characters.
 
-At least one character set must be specified. The other parameters have defaults. How to alter these parameters is
-described in the sections below.
+At least one character group must be specified. The other parameters have default values.
+How to alter these parameters is described in the sections below.
 
 ==== Password Length
 
@@ -98,9 +100,9 @@ characters, digits from 0 to 9, etc.
 
 To specify a group, use one of the following variant of the `addCharGroup` function:
 
-* link:../site/apidocs/rodeo.password.pgencheck/rodeo/password/pgencheck/PasswordChecker.Factory.html#PasswordChecker.Factory.html#addCharGroup(java.lang.String)[`addCharGroup(String charGroup)`];
-* link:../site/apidocs/rodeo.password.pgencheck/rodeo/password/pgencheck/PasswordChecker.Factory.html#PasswordChecker.Factory.html#addCharGroup(java.lang.String,int))[`addCharGroup(String charGroup, int minCount)`];
-* link:../site/apidocs/rodeo.password.pgencheck/rodeo/password/pgencheck/PasswordChecker.Factory.html#PasswordChecker.Factory.html#addCharGroup(java.lang.String,int,int))[`addCharGroup(String charGroup, int minCount, int maxCount)`].
+* link:../site/apidocs/rodeo.password.pgencheck/rodeo/password/pgencheck/PasswordChecker.Factory.html#addCharGroup(java.lang.String)[`addCharGroup(String charGroup)`];
+* link:../site/apidocs/rodeo.password.pgencheck/rodeo/password/pgencheck/PasswordChecker.Factory.html#addCharGroup(java.lang.String,int))[`addCharGroup(String charGroup, int minCount)`];
+* link:../site/apidocs/rodeo.password.pgencheck/rodeo/password/pgencheck/PasswordChecker.Factory.html#addCharGroup(java.lang.String,int,int))[`addCharGroup(String charGroup, int minCount, int maxCount)`].
 
 Where:
 
@@ -127,7 +129,7 @@ By default, duplicate characters are not allowed in a `PasswordChecker`. To be m
 * a character group cannot contain the same character twice or more times;
 * a character group cannot contain a character that is already present in a different character group.
 
-If one of the two condition above occurs, the `addCharGroup` function will throw an `IllegalArgumentException`.
+If one of the two condition above is violated, the `addCharGroup` function will throw an `IllegalArgumentException`.
 
 If you wish for duplicate characters to be allowed in your `PasswordChecker`, you should call the
 `disallowDuplicateCharacters` method on your factory with an argument of `false` as in:
@@ -180,7 +182,7 @@ contains a few typical character groups:
 |===
 
 The `UNAMBIGUOUS` variations can be used to avoid confusion when users have to type their password, especially
-on a mobile device. (They are more useful in `PasswordMaker`s than `PasswordChecker`s.)
+on a mobile device. (They are more useful in `PasswordMaker` than `PasswordChecker`.)
 
 ==== Creating the PasswordChecker
 
@@ -258,7 +260,7 @@ but 4 or more were found)
 |===
 
 IMPORTANT: This function reports *only* the first error encountered, although there might be more than one problem
-with the password. Errors are reported in the same order as listed in the table above.
+with the password. Error conditions are checked for in the order listed in the above table.
 
 ==== fullCheck()
 
@@ -285,7 +287,7 @@ In the first case, `IllegalCharacterError` offers two functions to retrieve the 
 
 * link:../site/apidocs/rodeo.password.pgencheck/rodeo/password/pgencheck/IllegalCharacterError.html#getIllegalCharacter()[`getIllegalCharacter`]
 will return the offending character as a standard `String`;
-* link:../site/apidocs/rodeo.password.pgencheck/rodeo/password/pgencheck/IllegalCharacterError.html#getIllegalCodePoint()[`#getIllegalCodePoint()`]
+* link:../site/apidocs/rodeo.password.pgencheck/rodeo/password/pgencheck/IllegalCharacterError.html#getIllegalCodePoint()[`getIllegalCodePoint()`]
 will return the offending character as a code point (`int`).
 
 In the second case `BadCountForCharacterTypeError` make the following information available:
@@ -301,10 +303,10 @@ certain group), returns the maximum count allowed.
 | link:../site/apidocs/rodeo.password.pgencheck/rodeo/password/pgencheck/BadCountForCharacterTypeError.html#getActualCount()[`int getActualCount()`]
 | Returns how many characters are actually present.
 
-| link:../site/apidocs/rodeo.password.pgencheck/rodeo/password/pgencheck/BadCountForCharacterTypeError.html#getCharacterList()[`String getCharacterList()`]
+| link:../site/apidocs/rodeo.password.pgencheck/rodeo/password/pgencheck/BadCountForCharacterTypeError.html#getCharacterGroup()[`String getCharacterGroup()`]
 | Returns the character group affected by the problem as a `String`.
 
-| getCharacterListIndex()
+| link:../site/apidocs/rodeo.password.pgencheck/rodeo/password/pgencheck/BadCountForCharacterTypeError.html#getCharacterGroupIndex()[`int getCharacterGroupIndex()`]
 | Returns the _index_ of the character group. The index of character groups is determined by the order in which
 they were specified via one of the `addCharacterGroup` in the `PasswordChecker.Factory` associated to this
 `PasswordChecker`. The index starts at 0.
@@ -317,8 +319,8 @@ link:../site/apidocs/rodeo.password.pgencheck/rodeo/password/pgencheck/PasswordM
 object with the required parameters.
 
 Once this is done, you can call the
-* link:../site/apidocs/rodeo.password.pgencheck/rodeo/password/pgencheck/PasswordMaker.html#create()[`create` function]
-as required to create passwords.
+link:../site/apidocs/rodeo.password.pgencheck/rodeo/password/pgencheck/PasswordMaker.html#create()[`create`]
+fonction as required to create passwords.
 
 === Internal Factory
 
@@ -334,11 +336,11 @@ Here is the minimum code to implement a `PasswordMaker`:
 include::{sourcedir}/ManualExamples.java[tags=minimal-maker,indent=0]
 ----
 
-This creates a `PasswordMaker` that'll create passwords composed of the characters `abcdefgh` with
+This creates a `PasswordMaker` that'll generate passwords composed of the characters `abcdefgh` with
 a length of 16 characters.
 
-At least one character set must be specified. The other parameters have defaults. How to alter these parameters is
-described in the sections below.
+At least one character set must be specified. The other parameters have default values.
+How to alter these parameters is described in the sections below.
 
 ==== Password Length
 
@@ -357,7 +359,7 @@ include::{sourcedir}/ManualExamples.java[tags=maker-length,indent=0]
 
 ==== Character Set Constraints
 
-A password is composed of characters. At least one character group must be provided as the source of the password
+A password is composed of characters. At least one character group must be provided as a source of password
 characters.
 
 It is possible to specify an unlimited number of groups (but 3 to 5 is the norm) with added constraints
@@ -397,7 +399,7 @@ By default, duplicate characters are not allowed in a `PasswordMaker`. To be mor
 * a character group cannot contain the same character twice or more times;
 * a character group cannot contain a character that is already present in a different character group.
 
-If one of the two condition above occurs, the `addCharGroup` function will throw an `IllegalArgumentException`.
+If one of the two condition above is violated, the `addCharGroup` function will throw an `IllegalArgumentException`.
 
 If you wish for duplicate characters to be allowed in your `PasswordMaker`, you should call the
 `disallowDuplicateCharacters` method on your factory with an argument of `false` as in:
@@ -434,7 +436,8 @@ include::{sourcedir}/ManualExamples.java[tags=random-change,indent=0]
 
 If you don't define your own `RandomUIntGenerator`, an instance of
 link:../site/apidocs/rodeo.password.pgencheck/rodeo/password/pgencheck/DefaultUIntGenerator.html[`DefaultUIntGenerator`]
-is used. Internally `DefaultUIntGenerator` uses `java.util.concurrent.ThreadLocalRandom`.
+is used. Internally `DefaultUIntGenerator` uses
+link:https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/concurrent/ThreadLocalRandom.html[`java.util.concurrent.ThreadLocalRandom`].
 
 Any class implementing the `RandomUIntGenerator` interface must provide two functions:
 
