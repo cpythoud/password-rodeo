@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>rodeo.password</groupId>
-    <artifactId>password-generator-checker</artifactId>
+    <artifactId>password-rodeo</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <name>Password Rodeo</name>
