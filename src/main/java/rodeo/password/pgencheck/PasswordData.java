@@ -52,7 +52,7 @@ abstract class PasswordData {
     }
 
     /**
-     * Return the n<sup>th</sup> character group used in creating passwords. Character Group are referenced in
+     * Return the n<sup>th</sup> character group used in creating passwords. Character groups are referenced in
      * the order they are added to the factory. The first index is <code>0</code> (zero).
      * @param index of the character group to retrieve
      * @return the character group at the <code>index</code>
@@ -67,10 +67,12 @@ abstract class PasswordData {
 
     /**
      * Return how many characters from the n<sup>th</sup> character group are required in generated passwords.
-     * Character Group are referenced in the order they are added to the factory. The first index is <code>0</code>
+     * Character groups are referenced in the order they were added to the factory. The first index is <code>0</code>
      * (zero).
      * @param index of the character group minimum count to retrieve
-     * @return IndexOutOfBoundsException if the <code>index</code> is invalid
+     * @return the minimum number of characters from the group at the <code>index</code> required to form a valid
+     * password
+     * @throws IndexOutOfBoundsException if the <code>index</code> is invalid
      */
     public int getMinCharactersInGroup(int index) {
         if (!indexOK(index))
@@ -80,11 +82,12 @@ abstract class PasswordData {
     }
 
     /**
-     * Return the maximum number of characters from the n<sup>th</sup> character group are allowed in generated
-     * passwords. Character Group are referenced in the order they are added to the factory. The first index is
+     * Return the maximum number of characters from the n<sup>th</sup> character group allowed in generated
+     * passwords. Character groups are referenced in the order they were added to the factory. The first index is
      * <code>0</code> (zero).
      * @param index of the character group maximum count to retrieve
-     * @return IndexOutOfBoundsException if the <code>index</code> is invalid
+     * @return the maximum number of characters from the group at the <code>index</code> allowed in a valid password
+     * @throws  IndexOutOfBoundsException if the <code>index</code> is invalid
      */
     public int getMaxCharactersInGroup(int index) {
         if (!indexOK(index))

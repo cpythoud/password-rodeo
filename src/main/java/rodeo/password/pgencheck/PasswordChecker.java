@@ -53,16 +53,16 @@ public final class PasswordChecker extends PasswordData {
     }
 
     /**
-     * Get the minimum length required for a password to accepted.
-     * @return the minimum length required for a password to accepted
+     * Get the minimum length required for a password to be accepted.
+     * @return the minimum length required for a password to be accepted
      */
     public int getMinLength() {
         return minLength;
     }
 
     /**
-     * Get the maximum length required for a password to accepted.
-     * @return the maximum length required for a password to accepted
+     * Get the maximum length required for a password to be accepted.
+     * @return the maximum length required for a password to be accepted
      */
     public int getMaxLength() {
         return maxLength;
@@ -154,7 +154,7 @@ public final class PasswordChecker extends PasswordData {
      * Check if a password can be validated against the specified criteria and return a list of all the problems
      * encountered. This list is empty if there is no error.
      * @param password to be validated
-     * @return a list of all the errors encountered while validating the password or an empty list if
+     * @return a list of all the errors encountered while validating the password or an empty list if the
      * <code>password</code> matches all the criteria
      * @see PasswordCheckError
      */
@@ -190,7 +190,7 @@ public final class PasswordChecker extends PasswordData {
      * This factory class allows you to build a <code>PasswordChecker</code> using a fluent interface. You create a
      * <code>Factory</code> by calling {@link PasswordChecker#factory() PasswordChecker.factory()}.
      * Once all the criteria have been specified, you call the {@link #create() create} function
-     * to create your <code>PasswordChecker</code>.
+     * to create a <code>PasswordChecker</code> object.
      */
     public static final class Factory extends AbstractFactory<Factory> {
 
@@ -257,7 +257,7 @@ public final class PasswordChecker extends PasswordData {
          * @param charGroup a <code>String</code> containing all characters allowed in this group
          * @return <code>this</code> factory
          * @throws IllegalArgumentException if the character group contains duplicates or if the character group
-         * contains character already present in other character groups, unless duplicates have been explicitly
+         * contains characters already present in other character groups, unless duplicates have been explicitly
          * allowed by calling <code>disallowDuplicateCharacters(false)</code>
          * @see #disallowDuplicateCharacters(boolean)
          */
@@ -273,7 +273,7 @@ public final class PasswordChecker extends PasswordData {
          * @param minCount minimum number of characters from this group that must be present in the password
          * @return <code>this</code> factory
          * @throws IllegalArgumentException if the character group contains duplicates or if the character group
-         * contains character already present in other character groups, unless duplicates have been explicitly
+         * contains characters already present in other character groups, unless duplicates have been explicitly
          * allowed by calling <code>disallowDuplicateCharacters(false)</code>
          * @throws IllegalArgumentException if <code>minCount &lt; 0</code>
          * @see #disallowDuplicateCharacters(boolean)
@@ -284,8 +284,8 @@ public final class PasswordChecker extends PasswordData {
         }
 
         /**
-         * Add a group of allowed characters in the composition of the password and specifies a minimum character
-         * count.
+         * Add a group of allowed characters in the composition of the password and specifies a minimum and maximum
+         * character count.
          * @param charGroup a <code>String</code> containing all characters allowed in this group
          * @param minCount minimum number of characters from this group that must be present in the password
          * @param maxCount maximum number of characters from this group allowed in the password; a value of
@@ -293,7 +293,7 @@ public final class PasswordChecker extends PasswordData {
          *                 {@link #addCharGroup(String, int) addCharGroup(String, int)})
          * @return <code>this</code> factory
          * @throws IllegalArgumentException if the character group contains duplicates or if the character group
-         * contains character already present in other character groups, unless duplicates have been explicitly
+         * contains characters already present in other character groups, unless duplicates have been explicitly
          * allowed by calling <code>disallowDuplicateCharacters(false)</code>
          * @throws IllegalArgumentException if <code>minCount &lt; 0</code>, or <code>maxCount &lt; 0</code>, or
          * <code>maxCount &lt; minCount</code> (unless <code>maxCount == 0</code>)
@@ -305,9 +305,9 @@ public final class PasswordChecker extends PasswordData {
         }
 
         /**
-         * Disallow or allow duplicate character groups and between character groups. Allowing duplicate is
+         * Disallow or allow duplicates inside character groups and between character groups. Allowing duplicate is
          * usually unnecessary and error-prone.
-         * @param disallowDuplicateCharacters <code>true</code> if duplicates character should be disallowed (default),
+         * @param disallowDuplicateCharacters <code>true</code> if duplicate characters should be disallowed (default),
          *                                    <code>false</code> otherwise
          * @return <code>this</code> factory
          */

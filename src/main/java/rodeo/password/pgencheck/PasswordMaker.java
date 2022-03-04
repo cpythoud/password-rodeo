@@ -182,7 +182,7 @@ public final class PasswordMaker extends PasswordData {
      * This factory class allows you to build a <code>PasswordMaker</code> using a fluent interface. You create a
      * <code>Factory</code> by calling {@link PasswordMaker#factory() PasswordMaker.factory()}.
      * Once all the criteria have been specified, you call the {@link #create() create} function
-     * to create your <code>PasswordMaker</code>.
+     * to create a <code>PasswordMaker</code> object.
      */
     public static final class Factory extends AbstractFactory<Factory> {
 
@@ -225,7 +225,7 @@ public final class PasswordMaker extends PasswordData {
          * requirements on character groups would exceed the maximum length allowed for the password
          * @throws IllegalStateException if password generation would be impossible because too many restrictions
          * are placed on the maximum character count of each character group so that the specified password length
-         * cannot be reached.
+         * could not be reached.
          */
         public PasswordMaker create() {
             if (charGroups().isEmpty())
@@ -257,19 +257,19 @@ public final class PasswordMaker extends PasswordData {
             return sum < length;
         }
 
-        // !! The 4 methods below are only overloaded for documentation purpose !!
-
         @Override
         Factory getThis() {
             return this;
         }
+
+        // !! The 4 methods below are only overloaded for documentation purpose !!
 
         /**
          * Add a group of allowed characters in the composition of the password.
          * @param charGroup a <code>String</code> containing all characters allowed in this group
          * @return <code>this</code> factory
          * @throws IllegalArgumentException if the character group contains duplicates or if the character group
-         * contains character already present in other character groups, unless duplicates have been explicitly
+         * contains characters already present in other character groups, unless duplicates have been explicitly
          * allowed by calling <code>disallowDuplicateCharacters(false)</code>
          * @see #disallowDuplicateCharacters(boolean)
          */
@@ -285,7 +285,7 @@ public final class PasswordMaker extends PasswordData {
          * @param minCount minimum number of characters from this group that must be present in the password
          * @return <code>this</code> factory
          * @throws IllegalArgumentException if the character group contains duplicates or if the character group
-         * contains character already present in other character groups, unless duplicates have been explicitly
+         * contains characters already present in other character groups, unless duplicates have been explicitly
          * allowed by calling <code>disallowDuplicateCharacters(false)</code>
          * @throws IllegalArgumentException if <code>minCount &lt; 0</code>
          * @see #disallowDuplicateCharacters(boolean)
@@ -296,8 +296,8 @@ public final class PasswordMaker extends PasswordData {
         }
 
         /**
-         * Add a group of allowed characters in the composition of the password and specifies a minimum character
-         * count.
+         * Add a group of allowed characters in the composition of the password and specifies a minimum and a maximum
+         * character count.
          * @param charGroup a <code>String</code> containing all characters allowed in this group
          * @param minCount minimum number of characters from this group that must be present in the password
          * @param maxCount maximum number of characters from this group allowed in the password; a value of
@@ -305,7 +305,7 @@ public final class PasswordMaker extends PasswordData {
          *                 {@link #addCharGroup(String, int) addCharGroup(String, int)})
          * @return <code>this</code> factory
          * @throws IllegalArgumentException if the character group contains duplicates or if the character group
-         * contains character already present in other character groups, unless duplicates have been explicitly
+         * contains characters already present in other character groups, unless duplicates have been explicitly
          * allowed by calling <code>disallowDuplicateCharacters(false)</code>
          * @throws IllegalArgumentException if <code>minCount &lt; 0</code>, or <code>maxCount &lt; 0</code>, or
          * <code>maxCount &lt; minCount</code> (unless <code>maxCount == 0</code>)

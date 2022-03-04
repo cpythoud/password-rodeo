@@ -6,9 +6,9 @@ import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * A default implementation of <code>RandomUIntGenerator</code>. This class is used if no implementation of
- * <code>RandomUIntGenerator</code> is provided to a <code>PasswordMaker.Factory</code>.
+ * <code>RandomUIntGenerator</code> is provided to <code>PasswordMaker.Factory</code>.
  * <p>
- * This class use <code>ThreadLocalRandom.current()</code> internally;
+ * This class use <code>ThreadLocalRandom.current()</code> internally.
  * @see RandomUIntGenerator
  * @see PasswordMaker.Factory#setRandomUIntGenerator(RandomUIntGenerator)
  */
