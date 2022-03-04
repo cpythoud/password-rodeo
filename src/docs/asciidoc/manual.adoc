@@ -35,8 +35,8 @@ link:../site/apidocs/rodeo.password.pgencheck/rodeo/password/pgencheck/PasswordM
 for password generation. Their use is described in the sections below.
 
 If you would like to quickly get up to speed, I would recommend consulting the
-link:tutorial.html[Password Rodeo Tutorial]. Class details can be found in the
-link:../site/apidocs/rodeo.password.pgencheck/module-summary.html[javadocs].
+link:tutorial.html[Password Rodeo Tutorial]. Class details can be found in the project
+link:../site/apidocs/rodeo.password.pgencheck/module-summary.html[Javadoc].
 
 == Installation
 
@@ -98,7 +98,7 @@ on the minimum and maximum number of character from each group that need to be p
 Examples of character group would be: all lower-case alphabetical characters, all upper-case alphabetical
 characters, digits from 0 to 9, etc.
 
-To specify a group, use one of the following variant of the `addCharGroup` function:
+To specify a group, use one of the following variants of the `addCharGroup` function:
 
 * link:../site/apidocs/rodeo.password.pgencheck/rodeo/password/pgencheck/PasswordChecker.Factory.html#addCharGroup(java.lang.String)[`addCharGroup(String charGroup)`];
 * link:../site/apidocs/rodeo.password.pgencheck/rodeo/password/pgencheck/PasswordChecker.Factory.html#addCharGroup(java.lang.String,int))[`addCharGroup(String charGroup, int minCount)`];
@@ -107,13 +107,12 @@ To specify a group, use one of the following variant of the `addCharGroup` funct
 Where:
 
 * `charGroup` is the group of characters to be used; by default there should be no duplicate in the list or an
-`IllegalStateException` will be raised when you try to create the `PasswordChecker` (see <<Duplicate characters>>
-below for more information);
+`IllegalStateException` will be thrown (see <<Duplicate characters>> below for more information);
 * `minCount` is the minimum number of characters from this group that should be present in the password; the default
-value is zero; (the value should also not be negative and smaller or equal to `maxCount`);
+value is zero; (also, the value should not be negative and should be smaller or equal to `maxCount`);
 * `maxCount` is the maximum number of characters from this group that should be present in the password; the value
-0 (zero), which is also the default, means no upper limit. (The value should also not be negative and if different
-from zero, it should be greater or equal to `minCount`.)
+0 (zero), which is also the default, means no upper limit. (Also, the value should not be negative, and if different
+from zero should be greater or equal to `minCount`.)
 
 Here are a few examples:
 
@@ -132,7 +131,7 @@ By default, duplicate characters are not allowed in a `PasswordChecker`. To be m
 If one of the two condition above is violated, the `addCharGroup` function will throw an `IllegalArgumentException`.
 
 If you wish for duplicate characters to be allowed in your `PasswordChecker`, you should call the
-`disallowDuplicateCharacters` method on your factory with an argument of `false` as in:
+`disallowDuplicateCharacters` method on your factory with an argument of `false`:
 
 [source,java]
 ----
@@ -141,8 +140,8 @@ include::{sourcedir}/ManualExamples.java[tags=allow-duplicates,indent=0]
 
 `disallowDuplicateCharacters` must be called before you start adding character group that contains duplicates.
 
-WARNING: Duplicate characters in the same character set do not serve any purpose as far as password validation
-is concerned. Duplicate characters across two or more character sets can have a deep impact on password
+WARNING: Duplicate characters in the same character group do not serve any purpose as far as password validation
+is concerned. Duplicate characters across two or more character groups can have a deep impact on password
 validation and should not be used unless you know what you're doing; typically, you would be mirroring a
 similar setup in a `PasswordMaker` context. See <<Duplicate Characters in Password Generation>> for more
 information.
@@ -202,7 +201,7 @@ include::{sourcedir}/ManualExamples.java[tags=full-create-checker-ex,indent=0]
 
 === Password Validation
 
-Once a `PasswordChecker` has been set up, it can be used to validate password. There are three functions
+Once a `PasswordChecker` has been set up, it can be used to validate passwords. There are three functions
 available:
 
 * `quickCheck(String password)`: returns a boolean, `true` if the password is valid, `false` otherwise;
@@ -217,7 +216,7 @@ The following three sections describe each function in detail.
 
 The
 link:../site/apidocs/rodeo.password.pgencheck/rodeo/password/pgencheck/PasswordChecker.html#quickCheck(java.lang.String)[`quickCheck`]
-function returns `true` if the password can be validated and `false` otherwise.
+function returns `true` if the password can be validated or `false` otherwise.
 
 This function should be used to perform quick validation when there is no need to report the exact problem
 encountered if it fails.
@@ -285,8 +284,8 @@ if the password contains not enough or too many characters of a certain group (`
 
 In the first case, `IllegalCharacterError` offers two functions to retrieve the offending character:
 
-* link:../site/apidocs/rodeo.password.pgencheck/rodeo/password/pgencheck/IllegalCharacterError.html#getIllegalCharacter()[`getIllegalCharacter`]
-will return the offending character as a standard `String`;
+* link:../site/apidocs/rodeo.password.pgencheck/rodeo/password/pgencheck/IllegalCharacterError.html#getIllegalCharacter()[`getIllegalCharacter()`]
+will return the offending character as a `String`;
 * link:../site/apidocs/rodeo.password.pgencheck/rodeo/password/pgencheck/IllegalCharacterError.html#getIllegalCodePoint()[`getIllegalCodePoint()`]
 will return the offending character as a code point (`int`).
 
@@ -308,7 +307,7 @@ certain group), returns the maximum count allowed.
 
 | link:../site/apidocs/rodeo.password.pgencheck/rodeo/password/pgencheck/BadCountForCharacterTypeError.html#getCharacterGroupIndex()[`int getCharacterGroupIndex()`]
 | Returns the _index_ of the character group. The index of character groups is determined by the order in which
-they were specified via one of the `addCharacterGroup` in the `PasswordChecker.Factory` associated to this
+they were specified via one of the `addCharacterGroup` functions in the `PasswordChecker.Factory` associated to this
 `PasswordChecker`. The index starts at 0.
 |===
 
@@ -377,13 +376,13 @@ To specify a group, use one of the following variant of the `addCharGroup` funct
 Where:
 
 * `charGroup` is the group of characters to be used; by default there should be no duplicate in the list or an
-`IllegalStateException` will be raised when you try to create the `PasswordMaker`
+`IllegalStateException` will be thrown
 (see <<Duplicate Characters in Password Generation>> below for more information);
 * `minCount` is the minimum number of characters from this group that should be present in the password; the default
-value is zero; (the value should also not be negative and smaller or equal to `maxCount`);
+value is zero; (also, the value should not be negative and should be smaller or equal to `maxCount`);
 * `maxCount` is the maximum number of characters from this group that should be present in the password; the value
-0 (zero), which is also the default, means no upper limit. (The value should also not be negative and if different
-from zero, it should be greater or equal to `minCount`.)
+0 (zero), which is also the default, means no upper limit. (Also, the value should not be negative, and if different
+from zero should be greater or equal to `minCount`.)
 
 Here are a few examples:
 
@@ -402,7 +401,7 @@ By default, duplicate characters are not allowed in a `PasswordMaker`. To be mor
 If one of the two condition above is violated, the `addCharGroup` function will throw an `IllegalArgumentException`.
 
 If you wish for duplicate characters to be allowed in your `PasswordMaker`, you should call the
-`disallowDuplicateCharacters` method on your factory with an argument of `false` as in:
+`disallowDuplicateCharacters` method on your factory with an argument of `false`:
 
 [source,java]
 ----

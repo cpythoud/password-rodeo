@@ -1,7 +1,7 @@
 package rodeo.password.pgencheck;
 
 /**
- * Record a bad character count error in password validation.
+ * Records a bad character count error in password validation.
  * <p>
  * This class is used to record an error when a password does not contain enough representatives of a certain
  * character group or when it contains too many of these.
@@ -47,7 +47,7 @@ public class BadCountForCharacterTypeError extends PasswordCheckError {
     }
 
     /**
-     * Returns either the expected minimum or expected maximum representatives expected for the character group,
+     * Returns either the expected minimum or expected maximum representatives expected for the character group
      * depending on the error type: the minimum for
      * {@link PasswordCheckStatus#NOT_ENOUGH_OF_CHARACTER_GROUP PasswordCheckStatus.NOT_ENOUGH_OF_CHARACTER_GROUP}
      * and the maximum for
