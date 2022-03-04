@@ -8,10 +8,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import static rodeo.password.pgencheck.CharacterSets.DIGITS;
-import static rodeo.password.pgencheck.CharacterSets.LOWER_CASE;
-import static rodeo.password.pgencheck.CharacterSets.SYMBOLS;
-import static rodeo.password.pgencheck.CharacterSets.UPPER_CASE;
+import static rodeo.password.pgencheck.CharacterGroups.DIGITS;
+import static rodeo.password.pgencheck.CharacterGroups.LOWER_CASE;
+import static rodeo.password.pgencheck.CharacterGroups.SYMBOLS;
+import static rodeo.password.pgencheck.CharacterGroups.UPPER_CASE;
 
 public class TestMaker {
 

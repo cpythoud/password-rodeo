@@ -3,7 +3,7 @@ package rodeo.password.pgencheck;
 /**
  * Contains a few standard character groups
  */
-public final class CharacterSets {
+public final class CharacterGroups {
 
     /**
      * Lower-case characters: <code>abcdefghijklmnopqrstuvwxyz</code>
@@ -39,7 +39,7 @@ public final class CharacterSets {
      */
     public static final String UNAMBIGUOUS_SYMBOLS = "!@#$%&amp;*-_=+|?";
 
-    private CharacterSets() {
+    private CharacterGroups() {
         throw new UnsupportedOperationException();
     }
 

@@ -9,9 +9,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import static rodeo.password.pgencheck.CharacterSets.DIGITS;
-import static rodeo.password.pgencheck.CharacterSets.LOWER_CASE;
-import static rodeo.password.pgencheck.CharacterSets.UPPER_CASE;
+import static rodeo.password.pgencheck.CharacterGroups.DIGITS;
+import static rodeo.password.pgencheck.CharacterGroups.LOWER_CASE;
+import static rodeo.password.pgencheck.CharacterGroups.UPPER_CASE;
 
 public class TestChecker {
 

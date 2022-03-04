@@ -39,10 +39,10 @@ public class ManualExamples {
         // tag::full-create-checker-ex[]
         PasswordChecker checker = PasswordChecker.factory()
                 .setMinMaxLength(32, 96)
-                .addCharGroup(CharacterSets.LOWER_CASE, 1)
-                .addCharGroup(CharacterSets.UPPER_CASE, 1)
-                .addCharGroup(CharacterSets.DIGITS, 1, 2)
-                .addCharGroup(CharacterSets.SYMBOLS, 0, 3)
+                .addCharGroup(CharacterGroups.LOWER_CASE, 1)
+                .addCharGroup(CharacterGroups.UPPER_CASE, 1)
+                .addCharGroup(CharacterGroups.DIGITS, 1, 2)
+                .addCharGroup(CharacterGroups.SYMBOLS, 0, 3)
                 .create();
         // end::full-create-checker-ex[]
     }
@@ -98,10 +98,10 @@ public class ManualExamples {
         // tag::full-create-maker-ex[]
         PasswordMaker passwordMaker = PasswordMaker.factory()
                 .setLength(32)
-                .addCharGroup(CharacterSets.LOWER_CASE, 1)
-                .addCharGroup(CharacterSets.UPPER_CASE, 1)
-                .addCharGroup(CharacterSets.DIGITS, 1, 2)
-                .addCharGroup(CharacterSets.SYMBOLS, 0, 3)
+                .addCharGroup(CharacterGroups.LOWER_CASE, 1)
+                .addCharGroup(CharacterGroups.UPPER_CASE, 1)
+                .addCharGroup(CharacterGroups.DIGITS, 1, 2)
+                .addCharGroup(CharacterGroups.SYMBOLS, 0, 3)
                 .create();
         // end::full-create-maker-ex[]
     }
@@ -111,18 +111,18 @@ public class ManualExamples {
         // tag::full-monty[]
         PasswordChecker passwordChecker = PasswordChecker.factory()
                 .setMinMaxLength(32, 32)
-                .addCharGroup(CharacterSets.LOWER_CASE, 1)
-                .addCharGroup(CharacterSets.UPPER_CASE, 1)
-                .addCharGroup(CharacterSets.DIGITS, 1, 2)
-                .addCharGroup(CharacterSets.SYMBOLS, 0, 3)
+                .addCharGroup(CharacterGroups.LOWER_CASE, 1)
+                .addCharGroup(CharacterGroups.UPPER_CASE, 1)
+                .addCharGroup(CharacterGroups.DIGITS, 1, 2)
+                .addCharGroup(CharacterGroups.SYMBOLS, 0, 3)
                 .create();
 
         PasswordMaker passwordMaker = PasswordMaker.factory()
                 .setLength(32)
-                .addCharGroup(CharacterSets.LOWER_CASE, 1)
-                .addCharGroup(CharacterSets.UPPER_CASE, 1)
-                .addCharGroup(CharacterSets.DIGITS, 1, 2)
-                .addCharGroup(CharacterSets.SYMBOLS, 0, 3)
+                .addCharGroup(CharacterGroups.LOWER_CASE, 1)
+                .addCharGroup(CharacterGroups.UPPER_CASE, 1)
+                .addCharGroup(CharacterGroups.DIGITS, 1, 2)
+                .addCharGroup(CharacterGroups.SYMBOLS, 0, 3)
                 .create();
 
         for (int i = 0; i < 1_000_000; i++)

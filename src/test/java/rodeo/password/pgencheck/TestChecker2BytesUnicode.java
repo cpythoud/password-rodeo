@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import static rodeo.password.pgencheck.CharacterSets.LOWER_CASE;
+import static rodeo.password.pgencheck.CharacterGroups.LOWER_CASE;
 
 public class TestChecker2BytesUnicode {
 

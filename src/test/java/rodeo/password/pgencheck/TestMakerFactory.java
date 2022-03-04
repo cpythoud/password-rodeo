@@ -6,9 +6,9 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import static rodeo.password.pgencheck.CharacterSets.DIGITS;
-import static rodeo.password.pgencheck.CharacterSets.LOWER_CASE;
-import static rodeo.password.pgencheck.CharacterSets.UPPER_CASE;
+import static rodeo.password.pgencheck.CharacterGroups.DIGITS;
+import static rodeo.password.pgencheck.CharacterGroups.LOWER_CASE;
+import static rodeo.password.pgencheck.CharacterGroups.UPPER_CASE;
 
 import static rodeo.password.pgencheck.ErrorMessages.AT_LEAST_ONE_CHAR;
 import static rodeo.password.pgencheck.ErrorMessages.NO_MAKER_CHAR_SET_PROVIDED;
@@ -43,7 +43,7 @@ public class TestMakerFactory {
 
     @Test
     public void notEnoughCharsException() {
-        factory.setLength(16).addCharGroup(CharacterSets.DIGITS, 18, 25);
+        factory.setLength(16).addCharGroup(CharacterGroups.DIGITS, 18, 25);
         var exception = assertThrows(IllegalStateException.class, () -> factory.create());
         assertEquals(TOO_MANY_CHAR_BY_TYPE_FOR_LENGTH, exception.getMessage());
     }

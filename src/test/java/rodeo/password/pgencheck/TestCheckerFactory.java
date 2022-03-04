@@ -7,8 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import static rodeo.password.pgencheck.CharacterSets.DIGITS;
-import static rodeo.password.pgencheck.CharacterSets.UPPER_CASE;
+import static rodeo.password.pgencheck.CharacterGroups.DIGITS;
+import static rodeo.password.pgencheck.CharacterGroups.UPPER_CASE;
 
 import static rodeo.password.pgencheck.ErrorMessages.AT_LEAST_ONE_CHAR;
 import static rodeo.password.pgencheck.ErrorMessages.DUPLICATE_CHARS_FOUND_IN_GROUP;
@@ -70,7 +70,7 @@ public class TestCheckerFactory {
 
     @Test
     public void notEnoughCharsException() {
-        factory.setMinMaxLength(8, 16).addCharGroup(CharacterSets.DIGITS, 18, 25);
+        factory.setMinMaxLength(8, 16).addCharGroup(CharacterGroups.DIGITS, 18, 25);
         var exception = assertThrows(IllegalStateException.class, () -> factory.create());
         assertEquals(NOT_ENOUGH_CHARACTERS, exception.getMessage());
     }

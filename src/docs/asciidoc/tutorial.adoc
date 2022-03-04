@@ -43,7 +43,7 @@ lengths can lead to security issues. Feel free to research the subject on the in
 
 NOTE: The first argument to `addCharGroup` is a `String` that contains characters allowed in the password
 (for exemple `"abcdefgh"`). The
-link:../site/apidocs/rodeo.password.pgencheck/rodeo/password/pgencheck/CharacterSets.html[`CharacterSets`]
+link:../site/apidocs/rodeo.password.pgencheck/rodeo/password/pgencheck/CharacterGroups.html[`CharacterGroups`]
 class contains a few pre-defined character lists to get you started.
 
 To check if a password matches the validation criteria, you can use one of three functions provided
@@ -165,7 +165,7 @@ Let's build something a little more secure:
 include::{sourcedir}/TutorialExamples.java[tags=sec-pwd-maker,indent=0]
 ----
 
-NOTE: link:../site/apidocs/rodeo.password.pgencheck/rodeo/password/pgencheck/CharacterSets.html[`CharacterSets`]
+NOTE: link:../site/apidocs/rodeo.password.pgencheck/rodeo/password/pgencheck/CharacterGroups.html[`CharacterGroups`]
 contains list of unambiguous characters you can use to help your users. It's best to avoid these characters
 if your users will need to type their password in, especially on a mobile device.
 

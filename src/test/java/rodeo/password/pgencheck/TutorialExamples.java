@@ -11,9 +11,9 @@ public class TutorialExamples {
         // tag::basic-pwd-check[]
         var checker = PasswordChecker.factory()
                 .setMinMaxLength(8, 16)
-                .addCharGroup(CharacterSets.LOWER_CASE, 1)
-                .addCharGroup(CharacterSets.UPPER_CASE, 1)
-                .addCharGroup(CharacterSets.DIGITS, 1)
+                .addCharGroup(CharacterGroups.LOWER_CASE, 1)
+                .addCharGroup(CharacterGroups.UPPER_CASE, 1)
+                .addCharGroup(CharacterGroups.DIGITS, 1)
                 .create();
         // end::basic-pwd-check[]
 
@@ -46,7 +46,7 @@ public class TutorialExamples {
 
         assert errors.get(3).getErrorType().equals(PasswordCheckStatus.NOT_ENOUGH_OF_CHARACTER_GROUP);
         BadCountForCharacterTypeError missingCharType = (BadCountForCharacterTypeError) errors.get(3);
-        assert missingCharType.getCharacterGroup().equals(CharacterSets.DIGITS);
+        assert missingCharType.getCharacterGroup().equals(CharacterGroups.DIGITS);
         assert missingCharType.getExpectedCount() == 1;
         assert missingCharType.getActualCount() == 0;
         // end::basic-full-check[]
@@ -57,10 +57,10 @@ public class TutorialExamples {
         // tag::sec-pwd-check[]
         var checker = PasswordChecker.factory()
                 .setMinMaxLength(16, 64)
-                .addCharGroup(CharacterSets.LOWER_CASE, 1)
-                .addCharGroup(CharacterSets.UPPER_CASE, 1)
-                .addCharGroup(CharacterSets.DIGITS, 1)
-                .addCharGroup(CharacterSets.SYMBOLS)
+                .addCharGroup(CharacterGroups.LOWER_CASE, 1)
+                .addCharGroup(CharacterGroups.UPPER_CASE, 1)
+                .addCharGroup(CharacterGroups.DIGITS, 1)
+                .addCharGroup(CharacterGroups.SYMBOLS)
                 .create();
         // end::sec-pwd-check[]
     }
@@ -70,10 +70,10 @@ public class TutorialExamples {
         // tag::weird-pwd-check[]
         var checker = PasswordChecker.factory()
                 .setMinMaxLength(32, 160)
-                .addCharGroup(CharacterSets.LOWER_CASE, 1)
-                .addCharGroup(CharacterSets.UPPER_CASE, 1)
-                .addCharGroup(CharacterSets.DIGITS, 1, 5)
-                .addCharGroup(CharacterSets.SYMBOLS, 1, 3)
+                .addCharGroup(CharacterGroups.LOWER_CASE, 1)
+                .addCharGroup(CharacterGroups.UPPER_CASE, 1)
+                .addCharGroup(CharacterGroups.DIGITS, 1, 5)
+                .addCharGroup(CharacterGroups.SYMBOLS, 1, 3)
                 .create();
         // end::weird-pwd-check[]
     }
@@ -83,9 +83,9 @@ public class TutorialExamples {
         // tag::basic-pwd-maker[]
         var maker = PasswordMaker.factory()
                 .setLength(12)
-                .addCharGroup(CharacterSets.LOWER_CASE, 1)
-                .addCharGroup(CharacterSets.UPPER_CASE, 1)
-                .addCharGroup(CharacterSets.DIGITS, 1)
+                .addCharGroup(CharacterGroups.LOWER_CASE, 1)
+                .addCharGroup(CharacterGroups.UPPER_CASE, 1)
+                .addCharGroup(CharacterGroups.DIGITS, 1)
                 .create();
         // end::basic-pwd-maker[]
     }
@@ -95,10 +95,10 @@ public class TutorialExamples {
         // tag::sec-pwd-maker[]
         var maker = PasswordMaker.factory()
                 .setLength(12)
-                .addCharGroup(CharacterSets.UNAMBIGUOUS_LOWER_CASE, 1)
-                .addCharGroup(CharacterSets.UNAMBIGUOUS_UPPER_CASE, 1)
-                .addCharGroup(CharacterSets.UNAMBIGUOUS_DIGITS, 1, 3)
-                .addCharGroup(CharacterSets.UNAMBIGUOUS_SYMBOLS, 2, 2)
+                .addCharGroup(CharacterGroups.UNAMBIGUOUS_LOWER_CASE, 1)
+                .addCharGroup(CharacterGroups.UNAMBIGUOUS_UPPER_CASE, 1)
+                .addCharGroup(CharacterGroups.UNAMBIGUOUS_DIGITS, 1, 3)
+                .addCharGroup(CharacterGroups.UNAMBIGUOUS_SYMBOLS, 2, 2)
                 .create();
         // end::sec-pwd-maker[]
     }
@@ -126,17 +126,17 @@ public class TutorialExamples {
         // tag::pwd-reset[]
         var maker = PasswordMaker.factory()
                 .setLength(64)
-                .addCharGroup(CharacterSets.LOWER_CASE)
-                .addCharGroup(CharacterSets.UPPER_CASE)
-                .addCharGroup(CharacterSets.DIGITS)
+                .addCharGroup(CharacterGroups.LOWER_CASE)
+                .addCharGroup(CharacterGroups.UPPER_CASE)
+                .addCharGroup(CharacterGroups.DIGITS)
                 .create();
         // end::pwd-reset[]
 
         var checker = PasswordChecker.factory()
                 .setMinMaxLength(64, 64)
-                .addCharGroup(CharacterSets.LOWER_CASE)
-                .addCharGroup(CharacterSets.UPPER_CASE)
-                .addCharGroup(CharacterSets.DIGITS)
+                .addCharGroup(CharacterGroups.LOWER_CASE)
+                .addCharGroup(CharacterGroups.UPPER_CASE)
+                .addCharGroup(CharacterGroups.DIGITS)
                 .create();
 
         for (int i = 0; i < 1_000_000; i++)

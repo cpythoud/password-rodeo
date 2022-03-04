@@ -149,7 +149,7 @@ information.
 ==== Pre-defined Character Groups
 
 To help in the creation of standard `PasswordChecker` and `PasswordMaker`, the utility class
-link:../site/apidocs/rodeo.password.pgencheck/rodeo/password/pgencheck/CharacterSets.html[`CharacterSets`]
+link:../site/apidocs/rodeo.password.pgencheck/rodeo/password/pgencheck/CharacterGroups.html[`CharacterGroups`]
 contains a few typical character groups:
 
 |===
@@ -417,7 +417,7 @@ parameters to specify minimum and maximum character counts.
 ==== Pre-defined Character Groups in Password Generation
 
 To help in the creation of standard `PasswordChecker` and `PasswordMaker`, the utility class
-link:../site/apidocs/rodeo.password.pgencheck/rodeo/password/pgencheck/CharacterSets.html[`CharacterSets`]
+link:../site/apidocs/rodeo.password.pgencheck/rodeo/password/pgencheck/CharacterGroups.html[`CharacterGroups`]
 contains a few typical character groups. Please see <<Pre-defined Character Groups>> above for more information.
 
 ==== Generating Random Numbers
