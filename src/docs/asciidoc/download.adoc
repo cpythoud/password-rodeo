@@ -13,5 +13,10 @@ In the meantime, you can download a binary jar file:
 
 * link:/download/password-rodeo-1.0-SNAPSHOT.jar[`password-rodeo-1.0-SNAPSHOT.jar`]
 
-and/or download the source code from
+Here are the source code and javadoc for the project:
+
+* link:/download/password-rodeo-1.0-SNAPSHOT-sources.jar[`password-rodeo-1.0-SNAPSHOT-sources.jar`]
+* link:/download/password-rodeo-1.0-SNAPSHOT-javadoc.jar[`password-rodeo-1.0-SNAPSHOT-javadoc.jar`]
+
+Library and documentation can be built from source code hosted on
 link:https://github.com/cpythoud/password-rodeo[GitHub].
