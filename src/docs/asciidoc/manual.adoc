@@ -95,7 +95,7 @@ characters.
 It is possible to specify an unlimited number of groups (but 3 to 5 is the norm) with added constraints
 on the minimum and maximum number of character from each group that need to be present in the password.
 
-Examples of character group would be: all lower-case alphabetical characters, all upper-case alphabetical
+Examples of character groups would be: all lower-case alphabetical characters, all upper-case alphabetical
 characters, digits from 0 to 9, etc.
 
 To specify a group, use one of the following variants of the `addCharGroup` function:
@@ -112,7 +112,7 @@ Where:
 value is zero; (also, the value should not be negative and should be smaller or equal to `maxCount`);
 * `maxCount` is the maximum number of characters from this group that should be present in the password; the value
 0 (zero), which is also the default, means no upper limit. (Also, the value should not be negative, and if different
-from zero should be greater or equal to `minCount`.)
+from zero should be greater than or equal to `minCount`.)
 
 Here are a few examples:
 
@@ -128,7 +128,7 @@ By default, duplicate characters are not allowed in a `PasswordChecker`. To be m
 * a character group cannot contain the same character twice or more times;
 * a character group cannot contain a character that is already present in a different character group.
 
-If one of the two condition above is violated, the `addCharGroup` function will throw an `IllegalArgumentException`.
+If one of the two conditions above is violated, the `addCharGroup` function will throw an `IllegalArgumentException`.
 
 If you wish for duplicate characters to be allowed in your `PasswordChecker`, you should call the
 `disallowDuplicateCharacters` method on your factory with an argument of `false`:
@@ -138,7 +138,7 @@ If you wish for duplicate characters to be allowed in your `PasswordChecker`, yo
 include::{sourcedir}/ManualExamples.java[tags=allow-duplicates,indent=0]
 ----
 
-`disallowDuplicateCharacters` must be called before you start adding character group that contains duplicates.
+`disallowDuplicateCharacters` must be called before you start adding character groups that contains duplicates.
 
 WARNING: Duplicate characters in the same character group do not serve any purpose as far as password validation
 is concerned. Duplicate characters across two or more character groups can have a deep impact on password
@@ -221,7 +221,7 @@ function returns `true` if the password can be validated or `false` otherwise.
 This function should be used to perform quick validation when there is no need to report the exact problem
 encountered if it fails.
 
-Typically, you'll want to give some feedback to the user as to why the password she selected got rejected and
+Typically, you'll want to give some feedback to the user as to why the password they selected got rejected and
 therefore use one of the other two functions available.
 
 ==== [[check-func]]check()
@@ -267,7 +267,7 @@ The
 link:../site/apidocs/rodeo.password.pgencheck/rodeo/password/pgencheck/PasswordChecker.html#fullCheck(java.lang.String)[`fullCheck`]
 function returns a `List` of
 link:../site/apidocs/rodeo.password.pgencheck/rodeo/password/pgencheck/PasswordCheckError.html[`PasswordCheckError`]
-objects, each one detailing a different problem found with the password. If there are no problem, the `List` will
+objects, each one detailing a different problem found with the password. If there are no problems, the `List` will
 be empty.
 
 You can call the function `getErrorType()` on a `PasswordCheckError` object to identify the problem:
@@ -335,7 +335,7 @@ Here is the minimum code to implement a `PasswordMaker`:
 include::{sourcedir}/ManualExamples.java[tags=minimal-maker,indent=0]
 ----
 
-This creates a `PasswordMaker` that'll generate passwords composed of the characters `abcdefgh` with
+This creates a `PasswordMaker` that will generate passwords composed of the characters `abcdefgh` with
 a length of 16 characters.
 
 At least one character set must be specified. The other parameters have default values.
@@ -362,12 +362,12 @@ A password is composed of characters. At least one character group must be provi
 characters.
 
 It is possible to specify an unlimited number of groups (but 3 to 5 is the norm) with added constraints
-on the minimum and maximum number of character from each group that need to be present in the password.
+on the minimum and maximum number of characters from each group that need to be present in the password.
 
-Examples of character group would be: all lower-case alphabetical characters, all upper-case alphabetical
+Examples of character groups would be: all lower-case alphabetical characters, all upper-case alphabetical
 characters, digits from 0 to 9, etc.
 
-To specify a group, use one of the following variant of the `addCharGroup` function:
+To specify a group, use one of the following variants of the `addCharGroup` function:
 
 * link:../site/apidocs/rodeo.password.pgencheck/rodeo/password/pgencheck/PasswordMaker.Factory.html#PasswordMaker.Factory.html#addCharGroup(java.lang.String)[`addCharGroup(String charGroup)`];
 * link:../site/apidocs/rodeo.password.pgencheck/rodeo/password/pgencheck/PasswordMaker.Factory.html#PasswordMaker.Factory.html#addCharGroup(java.lang.String,int))[`addCharGroup(String charGroup, int minCount)`];
@@ -382,7 +382,7 @@ Where:
 value is zero; (also, the value should not be negative and should be smaller or equal to `maxCount`);
 * `maxCount` is the maximum number of characters from this group that should be present in the password; the value
 0 (zero), which is also the default, means no upper limit. (Also, the value should not be negative, and if different
-from zero should be greater or equal to `minCount`.)
+from zero should be greater than or equal to `minCount`.)
 
 Here are a few examples:
 
@@ -408,7 +408,7 @@ If you wish for duplicate characters to be allowed in your `PasswordMaker`, you 
 include::{sourcedir}/ManualExamples.java[tags=allow-duplicates,indent=0]
 ----
 
-`disallowDuplicateCharacters` must be called before you start adding character group that contains duplicates.
+`disallowDuplicateCharacters` must be called before you start adding character groups that contains duplicates.
 
 WARNING: Duplicating characters in the composition of your password is of dubious value. If you want to obtain
 a specific composition in terms of characters from certain groups, you should use function `addCharGroup`
@@ -422,7 +422,7 @@ contains a few typical character groups. Please see <<Pre-defined Character Grou
 
 ==== Generating Random Numbers
 
-Generating random password is an application of random number generation.
+Generating random passwords is an application of random number generation.
 
 To control the way it's done, you can pass an object implementing the
 link:../site/apidocs/rodeo.password.pgencheck/rodeo/password/pgencheck/RandomUIntGenerator.html[`RandomUIntGenerator`]

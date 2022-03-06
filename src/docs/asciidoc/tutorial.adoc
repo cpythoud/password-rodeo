@@ -16,7 +16,7 @@ link:../site/apidocs/rodeo.password.pgencheck/rodeo/password/pgencheck/PasswordM
 and
 link:../site/apidocs/rodeo.password.pgencheck/rodeo/password/pgencheck/PasswordChecker.html[`PasswordChecker`].
 
-The first one allows you to generate random passwords according to set of criteria you specify. The second one
+The first one allows you to generate random passwords according to a set of criteria you specify. The second one
 allows you to validate passwords submitted by your users, again according to a set of criteria that you get
 to specify.
 
@@ -105,10 +105,10 @@ link:manual.html[full Manual].
 
 Before tackling password generation, let's look at two more examples.
 
-Let's assume, we would like to impose more stringent constraints on user password and decide that our passwords
+Let's assume, we would like to impose more stringent constraints on user passwords and decide that our passwords
 should have a minimum length of 16 characters and a maximum length of 64 characters. Furthermore, we want
 the passwords to be composed of a mix of upper-case and lower-case letters and digits with at least one of each
-type of characters present. We would also like to allow the user to use _symbols_ in her password (like `$`, `&`,
+type of characters present. We would also like to allow the user to use _symbols_ in their password (like `$`, `&`,
 `*`, etc.)
 
 Here is how to do it:
