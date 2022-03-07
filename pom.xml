@@ -4,7 +4,7 @@
 
     <groupId>rodeo.password</groupId>
     <artifactId>password-rodeo</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
 
     <name>Password Rodeo</name>
     <description>
