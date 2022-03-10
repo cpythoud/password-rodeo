@@ -7,9 +7,10 @@ Christophe Pythoud
 ifndef::imagesdir[:imagesdir: images]
 ifndef::sourcedir[:sourcedir: ../../test/java/rodeo/password/pgencheck]
 
-Password Rodeo will soon be available on Maven Central.
+Password Rodeo is available on Maven Central and can be obtained using
+link:../site/dependency-info.html[your favorite dependency management system.]
 
-In the meantime, you can download a binary jar file:
+Or you can download the binary jar file below:
 
 * link:/download/password-rodeo-1.0.jar[`password-rodeo-1.0.jar`]
 

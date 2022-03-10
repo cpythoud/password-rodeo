@@ -43,7 +43,8 @@ link:../site/apidocs/rodeo.password.pgencheck/module-summary.html[Javadoc].
 You can get the library from the
 link:download.html[Download Page]
 or use your
-link:../site/dependency-info.html[favorite dependency management system].
+link:../site/dependency-info.html[favorite dependency management system]
+to obtain it from Maven Central.
 
 == Validating Passwords
 
