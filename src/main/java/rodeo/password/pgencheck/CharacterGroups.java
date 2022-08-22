@@ -37,7 +37,7 @@ public final class CharacterGroups {
     /**
      * Symbol characters that cannot be mistaken for other symbols: <code>!@#$%&amp;*-_=+|</code>
      */
-    public static final String UNAMBIGUOUS_SYMBOLS = "!@#$%&amp;*-_=+|?";
+    public static final String UNAMBIGUOUS_SYMBOLS = "!@#$%&*-_=+|?";
 
     private CharacterGroups() {
         throw new UnsupportedOperationException();
