@@ -1,7 +1,7 @@
 = Password Rodeo -- Manual
 Christophe Pythoud
-2022-02-20
-:revnumber: 1.0
+2022-08-22
+:revnumber: 1.0.1
 :example-caption!:
 :source-highlighter: highlight.js
 ifndef::imagesdir[:imagesdir: images]
